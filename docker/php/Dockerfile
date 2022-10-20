@@ -59,3 +59,9 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
 COPY    conf.d/php.ini /usr/local/etc/php
 COPY    conf.d/symfony.ini /usr/local/etc/php/conf.d
 
+# Composer 
+RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
+
+
+# other 
+RUN echo 'memory_limit = 2048M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;

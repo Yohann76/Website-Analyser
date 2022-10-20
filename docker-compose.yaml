@@ -47,6 +47,11 @@ services:
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console doctrine:schema:update --force
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console d:f:l -n
 
+
+    # on linux 
+    ## run : docker-compose exec php sh 
+    ##install composer 2 : composer self-update
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpMyAdmin
