@@ -23,7 +23,7 @@ services:
     restart: always
     volumes:
       - '.:/var/www/Website-Analyser'
-      #- './docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf'
+      - './docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf'
     working_dir: /var/www/Website-Analyser
     # available in : http://localhost:8000/
 

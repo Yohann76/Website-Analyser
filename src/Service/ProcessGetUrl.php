@@ -19,7 +19,8 @@ class ProcessGetUrl
     // https://www.docenligne.com/documentation/lister-les-urls-dun-site-web-avec-wget.html
     // command : wget --no-verbose --recursive --spider --force-html --level=1000 --no-directories --reject=jpg,jpeg,png,gif,js,css,PNG,JPG www.docenligne.com 2>&1 | sort | uniq | grep -oe 'http://[^ ]*' > resultat2.txt -n
 
-        $process = new Process(['ls', '-lsa']);
+        // actually : /var/www/Website-Analyser/public
+        $process = new Process(['sh ./script/findExternalLink.sh']);
         $process->run();
         
         // executes after the command finishes
