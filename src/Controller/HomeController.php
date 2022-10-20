@@ -20,7 +20,7 @@ class HomeController extends AbstractController
 
         $domain = "openclassrooms.com/fr/";
 
-        $processGetUrl->testingProcess(); 
+        $processGetUrl->testingProcess();
 
 
         //$getAllUrlInDomain->getContentsDomain($domain); 
