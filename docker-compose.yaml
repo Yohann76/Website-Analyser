@@ -50,7 +50,7 @@ services:
 
     # on linux 
     ## run : docker-compose exec php sh 
-    ##install composer 2 : composer self-update
+    ##install composer 2 : composer self-update #install composer 2 in dockerfile for resolve this issue 
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

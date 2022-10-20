@@ -15,7 +15,6 @@ use Symfony\Component\Process\Process;
 */
 class ProcessGetUrl
 {
-
     // need linux environment -> docker environement 
     public function testingProcess() {
 
@@ -24,8 +23,14 @@ class ProcessGetUrl
 
     // actually : /var/www/Website-Analyser/public
     // $process = new Process(['sh ./script/findExternalLink.sh']);
-    $process = new Process(['apt install lynx -y']);
+
+    $process = new Process(['apt install lynx -y']); // use root ? 
     $process->run();
+
+    // executes after the command finishes
+    if (!$process->isSuccessful()) {
+        throw new ProcessFailedException($process);
+    }
     
     $process1 = new Process(['lynx -dump -listonly https://privanciel.com']);
     $process1->run();
@@ -35,7 +40,7 @@ class ProcessGetUrl
         throw new ProcessFailedException($process1);
     }
         
-        echo $process1->getOutput();
+    echo $process1->getOutput();
     
     }
 
