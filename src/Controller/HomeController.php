@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\getAllUrlInDomain;
+use App\Service\ProcessGetUrl;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,13 +15,16 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(getAllUrlInDomain $getAllUrlInDomain): Response
+    public function index(getAllUrlInDomain $getAllUrlInDomain, ProcessGetUrl $processGetUrl): Response
     {
 
-        $domain = "privanciel.com";
+        $domain = "openclassrooms.com/fr/";
+
+        $processGetUrl->testingProcess(); 
+
 
         //$getAllUrlInDomain->getContentsDomain($domain); 
-        $getAllUrlInDomain->testingURLArray($domain); 
+        // $getAllUrlInDomain->testingURLArray($domain); 
       
 
         /*
