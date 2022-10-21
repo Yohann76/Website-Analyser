@@ -2,18 +2,104 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Orion Monitoring{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+            crossorigin="anonymous">
+
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" 
+            integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" 
+            crossorigin="anonymous">
+
+
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
         {% endblock %}
+
+
+
+
+
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha512-ldc1sPu1FZ8smgkgp+HwnYyVb1eRn2wEmKrDg1JqPEb02+Ei4kNzDIQ0Uwh0AJVLQFjJoWwG+764x70zy5Tv4A=="
+            crossorigin="anonymous">
+            </script>
+    
+    
+            <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
+
+            
         {% endblock %}
     </head>
     <body>
+
+        <!-- nav -->
+
         {% block body %}{% endblock %}
+        
+        
+        <!-- footer --> 
+    
+        <footer class="site-footer">
+          <div class="container reduct">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <h6>Orion Monitoring <br/><br/></h6>
+                <p class="text-justify"> Orion Monitoring est une solution pour surveiller votre application ou votre site web.   </p>
+                <p class="text-justify"> Indispensable pour surveiller la disponibilité de vos site web. <br/>
+                Gestion de certificat SSL, DNS, expiration de domaine.. <br/>
+                 !</p>
+              </div>
+    
+              <div class="col-xs-6 col-md-3">
+                <h6>Liens</h6>
+                <ul class="footer-links">
+                  <li><a href="#">Orion Monitoring</a></li>
+                  <li><a href="#">Politique de confidentialité et mentions légales</a></li>
+                  <li><a href="#">Nos Partenaires</a></li>
+                </ul>
+              </div>
+    
+              <div class="col-xs-6 col-md-3" style="color:white;">
+                <img class="img-footer" src="#"
+                alt="Orion Monitoring"></img>
+              </div>
+           
+    
+            </div>
+            <hr>
+          </div>
+          <div class="container reduct">
+            <div class="row">
+              <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2022 Tous droit réservé
+             <a href="#">Vivre en transition</a>.
+                </p>
+              </div>
+    
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                  <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>  
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+    
     </body>
 </html>

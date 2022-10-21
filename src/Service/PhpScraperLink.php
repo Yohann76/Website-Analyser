@@ -40,7 +40,8 @@ class PhpScraperLink
             array_push($arrayResultStatusCode, array($value=>$valueStatusCode ));
         }
 
-        dd($arrayResultStatusCode);  // time out with arthur immo 
+        //dd($arrayResultStatusCode);  // time out with arthur immo 
+        return $arrayResultStatusCode ; 
     
     }
 

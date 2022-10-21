@@ -16,25 +16,18 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(getAllUrlInDomain $getAllUrlInDomain, ProcessGetUrl $processGetUrl, PhpScraperLink $phpScraperLink): Response
+    public function index(): Response
     {
 
-        $domain = "privanciel.com";
-
-        // $listLink = $phpScraperLink->getUrlWithDomain($domain);
-        $listLink = $phpScraperLink->testingPHPTesting($domain); // time out with arthurimmo 
-
-
-        
-
-        dd($listLink); 
-
+        // process with command (lynx cli)
         //$processGetUrl->testingProcess(); // process not run for the moment 
 
-        // scrapping with httpclient : is so long 
-        // $getAllUrlInDomain->getContentsDomain($domain); 
-        // $getAllUrlInDomain->testingURLArray($domain); 
-      
+        
+        // scrapping with httpclient 
+        // privanciel.com : 8,19 seconde 
+        // arhutimmo.com -> 1min/504 gateway Time out->  arthurimmo.com 
+        //$listLink = $getAllUrlInDomain->testingURLArray($domain); 
+        //dd($listLink);
 
         
         return $this->render('home/index.html.twig', [

@@ -40,16 +40,20 @@ services:
     volumes:
       - .:/var/www/Website-Analyser:cached
     working_dir: /var/www/Website-Analyser
-    # run : docker-compose exec php bash 
+    # run : docker-compose exec php sh 
     # run : docker-compose exec php composer update
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console cache:clear 
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console d:d:c
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console doctrine:schema:update --force
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console d:f:l -n
 
+  # run : docker-compose exec php sh 
+  # run : php bin/console d:d:c
+
 
     # on linux 
     ## run : docker-compose exec php sh 
+    
     ##install composer 2 : composer self-update #install composer 2 in dockerfile for resolve this issue 
 
   phpmyadmin:
@@ -86,3 +90,8 @@ services:
 
 volumes:
   db_data:
+
+
+
+# use 
+# docker-compose up --build -d // for recreate image after update dockerfile

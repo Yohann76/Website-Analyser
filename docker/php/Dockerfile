@@ -1,4 +1,4 @@
-FROM    composer:1.8 as composer
+FROM    composer:2.4 as composer
 FROM    php:7.3-fpm-alpine
 
 COPY    --from=composer /usr/bin/composer /usr/local/bin/composer
@@ -33,6 +33,12 @@ RUN     apk add --update --no-cache \
         && addgroup bar \
         && adduser -D -h /home -s /bin/sh -G bar foo \
         && apk del .build-deps
+
+# intl ? 
+RUN apk add icu-dev 
+# RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
+
 
 # Images libraries
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
