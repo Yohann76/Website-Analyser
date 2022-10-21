@@ -47,14 +47,19 @@ services:
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console doctrine:schema:update --force
     # run : docker-compose exec php php /var/www/website-Analyser/bin/console d:f:l -n
 
-  # run : docker-compose exec php sh 
-  # run : php bin/console d:d:c
+    # run : docker-compose exec php sh 
+    # run : php bin/console d:d:c
 
 
     # on linux 
     ## run : docker-compose exec php sh 
-    
+
     ##install composer 2 : composer self-update #install composer 2 in dockerfile for resolve this issue 
+
+
+    # in php exec 
+    # php bin/console 
+    # yarn add 
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -70,27 +75,58 @@ services:
     # available in : http://localhost:8080/
 
 
-  #varnish:
-    #build: docker/varnish
-    #container_name: varnish
-    #depends_on:
-      #- nginx
-    #ports:
-      #- ${VARNISH_PORT}:80
-    #restart: always
+  varnish:
+    build: docker/varnish
+    container_name: varnish
+    depends_on:
+      - nginx
+    ports:
+      - 82:80
+    restart: always
 
-  #blackfire:
-    #container_name: blackfire
-    #environment:
-      #BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
-      #BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
-      #BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
-      #BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
-    #image: blackfire/blackfire
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+
+
+  # agent blackfire & cllient 
+  blackfire:
+    image: blackfire/blackfire:2
+    container_name: blackfire
+    ports: ["8307"]
+    environment:
+        BLACKFIRE_LOG_LEVEL: 4 # docker-compose logs -f blackfire
+        # Exposes BLACKFIRE_* environment variables from the host
+        
+        # is versionned ;) 
+        BLACKFIRE_SERVER_ID: b7ee7f6c-5a6e-4704-9e83-1c95c85aff57
+        BLACKFIRE_SERVER_TOKEN: dc1a8a62110f852d199313fdfd3f509fdca47da5ec3181ed3a40ad18287b388d
+        BLACKFIRE_CLIENT_ID: 97d13784-82c6-4b3c-a6f9-4e88cb7b6618
+        BLACKFIRE_CLIENT_TOKEN: f83b76a483a2a851a8b9da8a1d0d8a736c8a85faa0ebd0425ba26b025ee211a0
+
+        # For use credential in .env 
+        # Name : $BLACKFIRE_CLIENT_TOKEN # Later 
+        # docker-compose --env-file .env up -d 
+
+  # https://blackfire.io/docs/up-and-running/docker#docker-compose #documentation 
+  # need a sonde in php dockerfile
+
+  # launch analyse with client container with name of container nginx (docker/php)
+  # command client : docker-compose exec blackfire blackfire curl http://nginx 
+
+  # maybe launch plugin blackfire for chrome or firefox, preferally launch with curl client
+  # You need to upgrade your subscription.
+
 
 volumes:
   db_data:
-
+  cache:
+    driver: local
 
 
 # use 
