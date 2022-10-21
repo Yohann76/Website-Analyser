@@ -1,0 +1,20 @@
+---
+symfony_root_dir: /var/www/html/Website-Analyser
+
+symfony_web_dir: "{{ symfony_root_dir }}/public"
+symfony_var_dir: "{{ symfony_root_dir }}/var"
+symfony_console_path: "{{ symfony_root_dir }}/bin/console"
+server_name: http://localhost:8000/
+installer: /tmp/installer.php
+
+# You can create vault for encrypt your data 
+
+# symfony_secret: "{{ vault_symfony_secret }}" # add vault in variable
+
+# Create a vault : ansible-vault create ansible/vars/vault.yml
+# View the secret vault  : ansible-vault view ansible/vars/vault.yml
+# Edit the secret vault : ansible-vault edit ansible/vars/vault.yml
+# Edit password the secret vault : ansible-vault rekey ansible/vars/vault.yml
+
+# ansible-playbook ansible/playbook.yml -i ansible/hosts.ini --ask-vault-pass  #for use ansible with vault
+# ansible-playbook -i ansible/hosts.ini --user user-ansible --become --ask-become-pass  ansible/playbook.yml  #for use ansible without vault # no run 

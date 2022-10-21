@@ -1,0 +1,135 @@
+---
+- name: Server Install
+  hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    #- ./vars/vault.yml
+    - ./vars/vars.yml
+
+  environment:
+    SYMFONY_ENV: "prod"
+    #SYMFONY_ENV: "{{ symfony_env|lower }}"
+
+  tasks:
+    - ping: ~
+
+    - name: Create project directory and set its permissions
+      become: true
+      file:
+        path: "{{ symfony_root_dir }}"
+        state: directory
+        recurse: yes
+
+    - name: Install Git VCS
+      become: true
+      apt:
+        name: git
+        state: latest
+ 
+    - name: Git clone ( for public repo ) 
+      git:
+        repo: https://github.com/Yohann76/Website-Analyser
+        dest: "{{ symfony_root_dir }}"
+        force: yes
+        clone: yes
+
+    - name: Fix var directory permissions
+      become: true
+      file:
+        path: "{{ symfony_var_dir }}"
+        state: directory
+        mode: 0777
+        recurse: yes
+    
+    - name: Fix bin/console permissions
+      become: true
+      file:
+        path: "{{ symfony_console_path }}"
+        mode: 0777
+
+    ###### DOCKER ######
+
+    - name: Install pip
+      apt: name=python-pip state=present
+
+    - name: install pip3
+      become: true
+      apt: name=python3-pip state=present 
+
+    - name: symfony_root_dir permissions
+      become: true
+      file:
+        path: "{{ symfony_root_dir }}"
+        mode: 0777
+
+    ##
+
+    - name: dockercompose4
+      become: true
+      command: 'pip3 install docker-compose'
+
+
+    ##
+    - name: docker1
+      become: true
+      command: 'curl -fsSL https://get.docker.com -o get-docker.sh'
+
+    - name: docker2
+      become: true
+      command: 'sh get-docker.sh'
+
+    ##
+    - name: build docker
+      become: true
+      command: '{{ symfony_root_dir }} docker-compose build'
+
+    #- name: Check if container is running
+      #shell: docker ps
+
+    ###### END DOCKER ######
+
+
+    ###### COMPOSER ######
+
+    - name: apt-get install composer
+      become: true
+      apt:
+        name: composer
+        state: latest
+
+    - name: Fix var directory permissionss
+      file:
+        path: "{{ symfony_var_dir }}"
+        state: directory
+        mode: 0777
+        recurse: yes
+
+
+    # Symfony console commands
+    #- name: Create DB if not exists
+      #command: '{{ symfony_console_path }} doctrine:database:create --if-not-exists --no-interaction'
+
+    #- name: make migration
+      #command: '{{ symfony_console_path }} make:migration'
+
+    #- name: Execute migrations
+      #command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
+
+    #- name: doctrine:schema:update
+      #command: '{{ symfony_console_path }} doctrine:schema:update --force --no-interaction'
+
+    #- name: Load data fixtures
+      #command: '{{ symfony_console_path }} doctrine:fixtures:load --no-interaction'
+      #when: symfony_env != "prod"
+
+
+  handlers:
+      - name: restart docker
+        service: 
+          name: docker 
+          state: restarted
+
+...

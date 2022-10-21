@@ -43,12 +43,14 @@ for the moment this project is for
 
 # Start this project 
 
-- composer install
-- yarn dev
+- docker-compose exec php sh 
 
-- php bin/console d:d:c 
-- php bin/console d:s:u --force 
+- composer install (in php container)
+- php bin/console d:d:c (in php container)
+- php bin/console d:s:u --force (in php container)
 
+- yarn install  (in php container)
+- yarn dev (in php container)
 
 ## Feature 
 
