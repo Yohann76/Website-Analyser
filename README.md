@@ -35,12 +35,19 @@ for the moment this project is for
 
 
 
-# Deploy this project  
+# Deploy this project with ansible and docker  
+
+
+
+
 
 # Start this project 
 
+- composer install
+- yarn dev
 
-
+- php bin/console d:d:c 
+- php bin/console d:s:u --force 
 
 
 ## Feature 
@@ -50,7 +57,11 @@ for the moment this project is for
 - Status Code HTTP
 - Certificat SSL 
 - CDN is valid 
-- All link is a https in content 
+- All link is a https in content
+
+-> Notification ? Who ? 
+
+-> Slack, Discord ... 
 
 ##### SEO (Each week)
 

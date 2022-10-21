@@ -1,0 +1,14 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+$body: #aaaaaaaa;
+$red : red ; 
+
+body {
+    /* background-color: $body; */ 
+}
+
+body {
+    background-color: lightgray;
+}
